@@ -1,0 +1,13 @@
+{
+  "name": "tjg-claude-marketplace",
+  "owner": {
+    "name": "Ivan Milosavljevic (TheJavaGuy)",
+    "email": "TheJavaGuy@yandex.com",
+    "url": "https://github.com/TheJavaGuy"
+  },
+  "metadata": {
+    "description": "Production-ready Claude Code plugins, specialized agents, and skills - optimized for granular installation and minimal token usage",
+    "version": "0.0.1"
+  },
+  "plugins": [{}]
+}

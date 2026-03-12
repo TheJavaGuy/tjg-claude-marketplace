@@ -1,0 +1,151 @@
+name: Validate Plugin Changes
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "plugins/**"
+      - ".claude-plugin/marketplace.json"
+      - ".github/workflows/validate-plugins.yml"
+  pull_request:
+    paths:
+      - "plugins/**"
+      - ".claude-plugin/marketplace.json"
+      - ".github/workflows/validate-plugins.yml"
+
+jobs:
+  validate-plugins:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Validate marketplace completeness
+        run: |
+          echo "## 1. Marketplace Completeness Check" >> $GITHUB_STEP_SUMMARY
+          EXIT_CODE=0
+          MARKETPLACE_FILE=".claude-plugin/marketplace.json"
+
+          # Validate marketplace.json exists and is valid JSON
+          if [ ! -f "$MARKETPLACE_FILE" ]; then
+            echo "❌ **Error**: marketplace.json not found at $MARKETPLACE_FILE" >> $GITHUB_STEP_SUMMARY
+            exit 1
+          fi
+
+          if ! jq empty "$MARKETPLACE_FILE" 2>&1; then
+            echo "❌ **Error**: marketplace.json has invalid JSON format" >> $GITHUB_STEP_SUMMARY
+            jq empty "$MARKETPLACE_FILE" 2>&1 || true
+            exit 1
+          fi
+
+          echo "✅ marketplace.json is valid JSON" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          # Get all plugin directories
+          PLUGIN_DIRS=$(find plugins -mindepth 1 -maxdepth 1 -type d | sort)
+
+          # Get all source paths from marketplace.json
+          MARKETPLACE_SOURCES=$(jq -r '.plugins[].source' "$MARKETPLACE_FILE" | sort)
+
+          # Check each plugin directory has an entry
+          echo "### Plugin Directory Coverage" >> $GITHUB_STEP_SUMMARY
+          for plugin_dir in $PLUGIN_DIRS; do
+            PLUGIN_NAME=$(basename "$plugin_dir")
+
+            # Check if this directory is referenced in marketplace.json sources
+            if echo "$MARKETPLACE_SOURCES" | grep -q "^\./$plugin_dir$"; then
+              echo "✅ **$PLUGIN_NAME**: Found in marketplace.json" >> $GITHUB_STEP_SUMMARY
+            else
+              echo "❌ **$PLUGIN_NAME**: NOT found in marketplace.json" >> $GITHUB_STEP_SUMMARY
+              echo "   Add entry with \`\"source\": \"./$plugin_dir\"\`" >> $GITHUB_STEP_SUMMARY
+              EXIT_CODE=1
+            fi
+          done
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+          exit $EXIT_CODE
+
+      - name: Validate plugin metadata
+        run: |
+          echo "## 2. Plugin Metadata Validation" >> $GITHUB_STEP_SUMMARY
+          EXIT_CODE=0
+
+          # Validate all plugin directories in the repository
+          PLUGIN_DIRS=$(find plugins -mindepth 1 -maxdepth 1 -type d | sort)
+
+          for plugin_dir in $PLUGIN_DIRS; do
+            PLUGIN_NAME=$(basename "$plugin_dir")
+            PLUGIN_JSON="${plugin_dir}/.claude-plugin/plugin.json"
+
+            echo "### $PLUGIN_NAME" >> $GITHUB_STEP_SUMMARY
+
+            # Check if plugin.json exists
+            if [ ! -f "$PLUGIN_JSON" ]; then
+              echo "❌ plugin.json not found at \`$PLUGIN_JSON\`" >> $GITHUB_STEP_SUMMARY
+              EXIT_CODE=1
+              continue
+            fi
+
+            # Validate JSON format
+            if ! jq empty "$PLUGIN_JSON" 2>&1; then
+              echo "❌ Invalid JSON format" >> $GITHUB_STEP_SUMMARY
+              echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+              jq empty "$PLUGIN_JSON" 2>&1 || true >> $GITHUB_STEP_SUMMARY
+              echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+              EXIT_CODE=1
+              continue
+            fi
+
+            echo "✅ Valid JSON format" >> $GITHUB_STEP_SUMMARY
+
+            # Validate required fields using jq
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "#### Field Validation" >> $GITHUB_STEP_SUMMARY
+            FIELDS_VALID=true
+
+            # Check top-level required fields
+            for field in name version description license; do
+              if ! jq -e --arg field "$field" 'has($field) and (.[$field] | type == "string" and length > 0)' "$PLUGIN_JSON" >/dev/null 2>&1; then
+                echo "❌ Missing or empty required field: \`$field\`" >> $GITHUB_STEP_SUMMARY
+                FIELDS_VALID=false
+                EXIT_CODE=1
+              fi
+            done
+
+            # Check author object and its required fields
+            if ! jq -e 'has("author") and (.author | type == "object")' "$PLUGIN_JSON" >/dev/null 2>&1; then
+              echo "❌ Missing or invalid \`author\` object" >> $GITHUB_STEP_SUMMARY
+              FIELDS_VALID=false
+              EXIT_CODE=1
+            else
+              for field in name email; do
+                if ! jq -e --arg field "$field" '.author | has($field) and (.[$field] | type == "string" and length > 0)' "$PLUGIN_JSON" >/dev/null 2>&1; then
+                  echo "❌ Missing or empty \`author.$field\`" >> $GITHUB_STEP_SUMMARY
+                  FIELDS_VALID=false
+                  EXIT_CODE=1
+                fi
+              done
+            fi
+
+            # Check keywords array (recommended but not required)
+            if ! jq -e 'has("keywords") and (.keywords | type == "array" and length > 0)' "$PLUGIN_JSON" >/dev/null 2>&1; then
+              echo "⚠️  Missing or empty \`keywords\` array (recommended)" >> $GITHUB_STEP_SUMMARY
+            fi
+
+            if [ "$FIELDS_VALID" = true ]; then
+              echo "✅ All required fields present and valid" >> $GITHUB_STEP_SUMMARY
+            fi
+
+            echo "" >> $GITHUB_STEP_SUMMARY
+          done
+
+          exit $EXIT_CODE
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "---" >> $GITHUB_STEP_SUMMARY
+          echo "✨ **Validation Complete**" >> $GITHUB_STEP_SUMMARY

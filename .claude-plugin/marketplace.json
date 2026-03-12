@@ -7,12 +7,12 @@
   },
   "metadata": {
     "description": "Production-ready Claude Code plugins, specialized agents, and skills - optimized for granular installation and minimal token usage",
-    "version": "0.0.1"
+    "version": "0.0.2"
   },
   "plugins": [
     {
       "name": "spec-creator",
-      "description": "Skills for creating and managing project and feature specifications",
+      "description": "Creating or amending specifications for software projects or features",
       "author": {
         "name": "Ivan Milosavljevic (TheJavaGuy)",
         "email": "TheJavaGuy@yandex.com"

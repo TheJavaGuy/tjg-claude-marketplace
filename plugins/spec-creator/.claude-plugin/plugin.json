@@ -1,0 +1,12 @@
+{
+  "name": "spec-creator",
+  "version": "0.0.1",
+  "description": "Creating or amending specifications for software projects or features",
+  "author": {
+    "name": "Ivan Milosavljevic (TheJavaGuy)",
+    "email": "TheJavaGuy@yandex.com",
+    "url": "https://github.com/TheJavaGuy"
+  },
+  "repository": "https://github.com/TheJavaGuy/tjg-claude-marketplace/tree/master/plugins/spec-creator",
+  "license": "GPL 3.0"
+}

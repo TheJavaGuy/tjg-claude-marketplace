@@ -1,0 +1,12 @@
+{
+  "name": "effective-java",
+  "version": "1.0.0",
+  "description": "Skills for Java development according to the famous book Effective Java 3rd Edition",
+  "author": {
+    "name": "Ivan Milosavljevic (TheJavaGuy)",
+    "email": "TheJavaGuy@yandex.com",
+    "url": "https://github.com/TheJavaGuy"
+  },
+  "repository": "https://github.com/TheJavaGuy/tjg-claude-marketplace/tree/master/plugins/effective-java",
+  "license": "GPL-3.0-only"
+}

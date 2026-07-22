@@ -138,14 +138,14 @@ Add `package.json` with prettier 3.9.6 and lefthook as dev dependencies, an `.nv
 
 ## Verification Contract
 
-| Gate | Command | Applies to | Pass signal |
-|---|---|---|---|
-| Toolchain smoke | `npm install && npx prettier --version` | U1 | Install clean; prints `3.9.6` |
-| Format idempotency | `npm run format` twice, then `git diff` | U2, U4 | Second run yields empty diff |
-| Changed-files script | U2 smoke scenarios for `npm run format:changed` (modified file, zero changed files, deleted file) | U2 | All three scenarios exit 0; only changed files are reformatted |
-| Repo check clean | `git ls-files -z '*.md' \| xargs -0 npx prettier --check` | U3, U4 | Exit 0 |
-| Hook enforcement | AE1/AE2 smoke via `git push --dry-run` on a scratch branch | U3 | Dirty push aborts naming the file; clean push proceeds |
-| Hook activation | `rm -rf node_modules && npm install` | U3 | `.git/hooks/pre-push` present and lefthook-managed |
+| Gate                 | Command                                                                                           | Applies to | Pass signal                                                    |
+| -------------------- | ------------------------------------------------------------------------------------------------- | ---------- | -------------------------------------------------------------- |
+| Toolchain smoke      | `npm install && npx prettier --version`                                                           | U1         | Install clean; prints `3.9.6`                                  |
+| Format idempotency   | `npm run format` twice, then `git diff`                                                           | U2, U4     | Second run yields empty diff                                   |
+| Changed-files script | U2 smoke scenarios for `npm run format:changed` (modified file, zero changed files, deleted file) | U2         | All three scenarios exit 0; only changed files are reformatted |
+| Repo check clean     | `git ls-files -z '*.md' \| xargs -0 npx prettier --check`                                         | U3, U4     | Exit 0                                                         |
+| Hook enforcement     | AE1/AE2 smoke via `git push --dry-run` on a scratch branch                                        | U3         | Dirty push aborts naming the file; clean push proceeds         |
+| Hook activation      | `rm -rf node_modules && npm install`                                                              | U3         | `.git/hooks/pre-push` present and lefthook-managed             |
 
 No unit-test framework exists in this repo and none is introduced; all gates are smoke checks.
 

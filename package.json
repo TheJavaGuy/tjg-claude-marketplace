@@ -1,0 +1,8 @@
+{
+  "name": "tjg-claude-marketplace",
+  "private": true,
+  "devDependencies": {
+    "lefthook": "2.1.10",
+    "prettier": "3.9.6"
+  }
+}

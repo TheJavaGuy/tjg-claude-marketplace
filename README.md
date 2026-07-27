@@ -1,7 +1,5 @@
 # Claude Code Plugins: Orchestration and Automation
 
-> **⚡ Updated for Opus 4.6, Sonnet 4.6 & Haiku 4.5** — Three-tier model strategy for optimal performance
-
 ### How It Works
 
 Each plugin is completely isolated with its own agents, commands, and skills:
@@ -39,6 +37,32 @@ Install the plugins you need:
 ```
 
 Each installed plugin loads **only its specific agents, commands, and skills** into Claude's context.
+
+### Installing All Plugins
+
+**Variant 1 — from inside Claude Code** (interactive session):
+
+```bash
+/plugin install spec-creator@tjg-claude-marketplace
+/plugin install better-writer@tjg-claude-marketplace
+/plugin install effective-java@tjg-claude-marketplace
+/plugin install german-teacher@tjg-claude-marketplace
+```
+
+**Variant 2 — from the CLI** (terminal, without starting a session):
+
+```bash
+claude plugin install spec-creator@tjg-claude-marketplace
+claude plugin install better-writer@tjg-claude-marketplace
+claude plugin install effective-java@tjg-claude-marketplace
+claude plugin install german-teacher@tjg-claude-marketplace
+```
+
+If the marketplace is not yet added, add it first via CLI:
+
+```bash
+claude plugin marketplace add thejavaguy/tjg-claude-marketplace
+```
 
 ### Plugins vs Agents
 

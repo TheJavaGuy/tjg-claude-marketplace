@@ -1,11 +1,12 @@
-# better-writer: first skill
+# german-teacher: new plugin + skill
 
-- [x] Design `technical-docs` skill (user-invoked, Diátaxis-framed, verify-before-ship)
-- [x] Write `plugins/better-writer/skills/technical-docs/SKILL.md`
-- [x] Validate plugin structure
+- [x] Create plugins/german-teacher/.claude-plugin/plugin.json
+- [x] Write plugins/german-teacher/skills/german-teacher/SKILL.md (CEFR range + learning target asked at setup, Feynman teaching, mastery bar per level)
+- [x] Register plugin in .claude-plugin/marketplace.json, bump version to 0.0.4
+- [x] Validate structure (JSON valid, all plugin dirs covered in marketplace.json)
 
 ## Review
 
-Skill written and validated (all checks PASS). Registered better-writer in marketplace.json.
-Added prose-tightening skill (three-pass: copyedit, naturalize, delivery cues).
-Registered effective-java in marketplace.json; SPDX license (GPL-3.0-only) in both plugin manifests; marketplace version 0.0.3.
+New german-teacher plugin. Skill is user-invoked (disable-model-invocation: true, zero context load).
+Draft persona reworked into 4 steps with checkable completion criteria: Setup (ask CEFR start/target + learning target), Teach (Feynman, level-scoped), The bar (3 consecutive correct, ≥1 novel production; recall questions excluded), The ladder (climb until target, closing summary).
+Correction rule stated once (single source of truth), applies to all steps.

@@ -65,3 +65,13 @@ claude plugin install spec-creator@tjg-claude-marketplace
 ### Plugins vs Agents
 
 You install **plugins**, which automatically bundle agents and skills.
+
+### Troubleshooting
+
+If you get `Failed to install plugin` error while installing a plugin, most probably you need to update your local copy of the marketplace. Just execute `claude plugin marketplace update tjg-claude-marketplace` and you should be ready to go.
+
+```bash
+$ claude plugin install german-teacher@tjg-claude-marketplace --scope project
+Installing plugin "german-teacher@tjg-claude-marketplace"...
+✘ Failed to install plugin "german-teacher@tjg-claude-marketplace": Plugin "german-teacher" not found in marketplace "tjg-claude-marketplace". Your local copy may be out of date — try `claude plugin marketplace update tjg-claude-marketplace`.
+```

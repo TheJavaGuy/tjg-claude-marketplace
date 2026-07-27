@@ -35,7 +35,7 @@ Done when the level-scoped material is presented and the student has produced at
 
 Test mastery, one question at a time: transformations, productions of novel sentences, translations the student has never seen, and "explain why this form" questions. Recall questions ("what does X mean?") test memorization and are banned — every question forces the student to *use* the material.
 
-The bar: three consecutive fully correct answers, at least one of which is a novel sentence the student constructed unprompted by an example. An error resets the streak and triggers the correction rule.
+The bar: three consecutive fully correct answers, at least one of which is a novel sentence the student constructed unprompted by an example. Grade each answer by what it says about the tested material: an error in the tested material resets the streak; a slip outside it — a typo of a letter or two, a wrong article when the target is a verb — means the attempt simply doesn't count, streak intact. Either way the correction rule fires.
 
 Done when the student clears the bar.
 

@@ -1,7 +1,10 @@
 import { execFileSync } from "node:child_process";
 import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { format as prettierFormat, resolveConfig as prettierResolveConfig } from "prettier";
+import {
+  format as prettierFormat,
+  resolveConfig as prettierResolveConfig,
+} from "prettier";
 
 interface PluginManifest {
   name: string;
@@ -26,10 +29,14 @@ function git(args: string[]): string {
 
 function stagedDiffIsEmpty(sinceCommit: string, pathspecs: string[]): boolean {
   try {
-    execFileSync("git", ["diff", "--cached", "--quiet", sinceCommit, "--", ...pathspecs], {
-      cwd: repoRoot,
-      stdio: "ignore",
-    });
+    execFileSync(
+      "git",
+      ["diff", "--cached", "--quiet", sinceCommit, "--", ...pathspecs],
+      {
+        cwd: repoRoot,
+        stdio: "ignore",
+      },
+    );
     return true;
   } catch (error) {
     const status = (error as { status?: number }).status;
@@ -57,7 +64,10 @@ function writeManifest(manifestPath: string, manifest: PluginManifest): void {
   writeFileSync(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
 }
 
-function versionAtRef(ref: string, relativeManifestPath: string): string | undefined {
+function versionAtRef(
+  ref: string,
+  relativeManifestPath: string,
+): string | undefined {
   let raw: string;
   try {
     raw = git(["show", `${ref}:${relativeManifestPath}`]);
@@ -83,7 +93,11 @@ for (const name of pluginNames) {
 
   const headVersion = versionAtRef("HEAD", relativeManifestPath);
   const indexVersion = versionAtRef(":0", relativeManifestPath);
-  if (headVersion !== undefined && indexVersion !== undefined && headVersion !== indexVersion) {
+  if (
+    headVersion !== undefined &&
+    indexVersion !== undefined &&
+    headVersion !== indexVersion
+  ) {
     continue; // already bumped by an earlier, not-yet-committed run -- don't double-bump
   }
 
@@ -117,13 +131,17 @@ for (const name of pluginNames) {
 }
 
 const tableRows = pluginNames.map((name) => {
-  const manifest = readManifest(join(pluginsDir, name, ".claude-plugin", "plugin.json"));
+  const manifest = readManifest(
+    join(pluginsDir, name, ".claude-plugin", "plugin.json"),
+  );
   return `| ${manifest.name} | ${manifest.version} | ${manifest.description} |`;
 });
 
-const table = ["| Plugin | Version | Description |", "| --- | --- | --- |", ...tableRows].join(
-  "\n",
-);
+const table = [
+  "| Plugin | Version | Description |",
+  "| --- | --- | --- |",
+  ...tableRows,
+].join("\n");
 
 const readme = readFileSync(readmePath, "utf8");
 const startIndex = readme.indexOf(README_START_MARKER);

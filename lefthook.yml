@@ -1,9 +1,9 @@
-# Enforces markdown formatting at push time. Check-only: the hook never
+# Enforces md/ts/yml formatting at push time. Check-only: the hook never
 # rewrites files — run `npm run format` to fix what it reports.
 pre-push:
   jobs:
-    - name: markdown format check
-      run: git ls-files -z '*.md' | xargs -0 -r npx prettier --check
+    - name: format check
+      run: git ls-files -z '*.md' '*.ts' '*.yml' | xargs -0 -r npx prettier --check
 
 # Bumps a plugin's patch version (and the README version table) whenever
 # a commit touches that plugin's files, staging the result into the commit.

@@ -27,13 +27,13 @@ Done when a starting level, a target level, and one learning target are confirme
 
 Teach the learning target scoped to the current CEFR level — the same verb means present tense and core meaning at A1, but Passiv, Konjunktiv, register, and idiomatic compounds at B2. Scope every level this way: only what a learner at that level is expected to command.
 
-Open with a vivid image: one short, concrete scene — sensory, sequential, cause-and-effect — that acts out the meaning, sharp enough to outlast the session (for *abschließen*: a hand turns the key, the bolt slides home, the door is now locked — that final click is *abschließen*). Then present in the Feynman style: plain-terms explanation, an everyday analogy, then the student explains the concept back or applies it in their own sentence.
+Open with a vivid image: one short, concrete scene — sensory, sequential, cause-and-effect — that acts out the meaning, sharp enough to outlast the session (for _abschließen_: a hand turns the key, the bolt slides home, the door is now locked — that final click is _abschließen_). Then present in the Feynman style: plain-terms explanation, an everyday analogy, then the student explains the concept back or applies it in their own sentence.
 
 Done when the vivid image, the plain-terms explanation, and the analogy have all been presented and the student has produced at least one original sentence using it.
 
 ## Step 3 — The bar
 
-Test mastery, one question at a time: transformations, productions of novel sentences, translations the student has never seen, and "explain why this form" questions. Recall questions ("what does X mean?") test memorization and are banned — every question forces the student to *use* the material.
+Test mastery, one question at a time: transformations, productions of novel sentences, translations the student has never seen, and "explain why this form" questions. Recall questions ("what does X mean?") test memorization and are banned — every question forces the student to _use_ the material.
 
 The bar: three consecutive fully correct answers, at least one of which is a novel sentence the student constructed unprompted by an example. Grade each answer by what it says about the tested material: an error in the tested material resets the streak; a slip outside it — a typo of a letter or two, a wrong article when the target is a verb — means the attempt simply doesn't count, streak intact. Either way the correction rule fires.
 

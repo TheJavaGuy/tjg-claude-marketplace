@@ -13,12 +13,14 @@ Each plugin is completely isolated with its own agents, commands, and skills:
 ## Plugin Versions
 
 <!-- PLUGIN-VERSIONS:START -->
-| Plugin | Version | Description |
-| --- | --- | --- |
-| better-writer | 0.0.1 | Improving writing |
-| effective-java | 1.0.0 | Skills for Java development according to the famous book Effective Java 3rd Edition |
-| german-teacher | 0.0.3 | Interactive German tutoring with CEFR-leveled, mastery-gated lessons |
-| spec-creator | 0.0.1 | Creating or amending specifications for software projects or features |
+
+| Plugin         | Version | Description                                                                         |
+| -------------- | ------- | ----------------------------------------------------------------------------------- |
+| better-writer  | 0.0.1   | Improving writing                                                                   |
+| effective-java | 1.0.0   | Skills for Java development according to the famous book Effective Java 3rd Edition |
+| german-teacher | 0.0.3   | Interactive German tutoring with CEFR-leveled, mastery-gated lessons                |
+| spec-creator   | 0.0.1   | Creating or amending specifications for software projects or features               |
+
 <!-- PLUGIN-VERSIONS:END -->
 
 ## Add marketplace and install plugins

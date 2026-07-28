@@ -1,6 +1,7 @@
 import { execFileSync } from "node:child_process";
 import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
+import { format as prettierFormat, resolveConfig as prettierResolveConfig } from "prettier";
 
 interface PluginManifest {
   name: string;
@@ -138,8 +139,14 @@ const updatedReadme =
   `\n${table}\n` +
   readme.slice(endIndex);
 
-if (updatedReadme !== readme) {
-  writeFileSync(readmePath, updatedReadme);
+const prettierConfig = await prettierResolveConfig(readmePath);
+const formattedReadme = await prettierFormat(updatedReadme, {
+  ...prettierConfig,
+  filepath: readmePath,
+});
+
+if (formattedReadme !== readme) {
+  writeFileSync(readmePath, formattedReadme);
   git(["add", "README.md"]);
   console.log("updated README.md plugin version table");
 }

@@ -1,13 +1,22 @@
 {
   "name": "tjg-claude-marketplace",
   "private": true,
+  "type": "module",
+  "engines": {
+    "node": "24.16.0",
+    "npm": "11.13.0"
+  },
   "scripts": {
     "prepare": "lefthook install",
     "format": "prettier --write \"**/*.md\"",
-    "format:changed": "git diff -z --name-only --diff-filter=d \"$(git merge-base master HEAD)\" -- '*.md' | xargs -0 -r prettier --write"
+    "format:changed": "git diff -z --name-only --diff-filter=d \"$(git merge-base master HEAD)\" -- '*.md' | xargs -0 -r prettier --write",
+    "bump-versions": "node scripts/bump-plugin-versions.ts",
+    "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
+    "@types/node": "24.13.3",
     "lefthook": "2.1.10",
-    "prettier": "3.9.6"
+    "prettier": "3.9.6",
+    "typescript": "7.0.2"
   }
 }

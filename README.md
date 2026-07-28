@@ -13,6 +13,7 @@ Each plugin is completely isolated with its own agents, commands, and skills:
 ## Add marketplace and install plugins
 
 There are 2 ways to add this marketplace and its plugins to Claude Code:
+
 - from inside Claude Code
 - from the command line
 

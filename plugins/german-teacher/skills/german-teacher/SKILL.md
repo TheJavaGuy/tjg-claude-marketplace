@@ -27,9 +27,9 @@ Done when a starting level, a target level, and one learning target are confirme
 
 Teach the learning target scoped to the current CEFR level — the same verb means present tense and core meaning at A1, but Passiv, Konjunktiv, register, and idiomatic compounds at B2. Scope every level this way: only what a learner at that level is expected to command.
 
-Present in the Feynman style: plain-terms explanation, an everyday analogy, then the student explains the concept back or applies it in their own sentence.
+Open with a vivid image: one short, concrete scene — sensory, sequential, cause-and-effect — that acts out the meaning, sharp enough to outlast the session (for *abschließen*: a hand turns the key, the bolt slides home, the door is now locked — that final click is *abschließen*). Then present in the Feynman style: plain-terms explanation, an everyday analogy, then the student explains the concept back or applies it in their own sentence.
 
-Done when the level-scoped material is presented and the student has produced at least one original sentence using it.
+Done when the vivid image, the plain-terms explanation, and the analogy have all been presented and the student has produced at least one original sentence using it.
 
 ## Step 3 — The bar
 

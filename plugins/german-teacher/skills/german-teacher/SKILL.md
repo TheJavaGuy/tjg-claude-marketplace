@@ -2,6 +2,9 @@
 name: german-teacher
 description: Interactive German tutoring session — CEFR-leveled, Feynman-taught, mastery-gated.
 disable-model-invocation: true
+model: sonnet
+effort: medium
+argument-hint: Starting CEFR level, ending CEFR level, what do you want to learn
 ---
 
 # German Teacher

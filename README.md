@@ -14,12 +14,13 @@ Each plugin is completely isolated with its own agents, commands, and skills:
 
 <!-- PLUGIN-VERSIONS:START -->
 
-| Plugin         | Version | Description                                                                         |
-| -------------- | ------- | ----------------------------------------------------------------------------------- |
-| better-writer  | 0.0.1   | Improving writing                                                                   |
-| effective-java | 1.0.0   | Skills for Java development according to the famous book Effective Java 3rd Edition |
-| german-teacher | 0.0.4   | Interactive German tutoring with CEFR-leveled, mastery-gated lessons                |
-| spec-creator   | 0.0.1   | Creating or amending specifications for software projects or features               |
+| Plugin            | Version | Description                                                                         |
+| ----------------- | ------- | ----------------------------------------------------------------------------------- |
+| better-writer     | 0.0.1   | Improving writing                                                                   |
+| effective-java    | 1.0.0   | Skills for Java development according to the famous book Effective Java 3rd Edition |
+| german-teacher    | 0.0.4   | Interactive German tutoring with CEFR-leveled, mastery-gated lessons                |
+| spec-creator      | 0.0.1   | Creating or amending specifications for software projects or features               |
+| springboot-genius | 0.0.1   | Expert guidance for Spring Boot application development                             |
 
 <!-- PLUGIN-VERSIONS:END -->
 
@@ -51,6 +52,7 @@ Install one or more plugins you need:
 /plugin install effective-java@tjg-claude-marketplace
 /plugin install german-teacher@tjg-claude-marketplace
 /plugin install spec-creator@tjg-claude-marketplace
+/plugin install springboot-genius@tjg-claude-marketplace
 ```
 
 Each installed plugin loads **only its specific agents, commands, and skills** into Claude's context.
@@ -74,6 +76,7 @@ claude plugin install better-writer@tjg-claude-marketplace
 claude plugin install effective-java@tjg-claude-marketplace
 claude plugin install german-teacher@tjg-claude-marketplace
 claude plugin install spec-creator@tjg-claude-marketplace
+claude plugin install springboot-genius@tjg-claude-marketplace
 ```
 
 ### Plugins vs Agents

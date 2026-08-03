@@ -30,9 +30,11 @@ Done when a starting level, a target level, and one learning target are confirme
 
 Teach the learning target scoped to the current CEFR level — the same verb means present tense and core meaning at A1, but Passiv, Konjunktiv, register, and idiomatic compounds at B2. Scope every level this way: only what a learner at that level is expected to command.
 
-Open with a vivid image: one short, concrete scene — sensory, sequential, cause-and-effect — that acts out the meaning, sharp enough to outlast the session (for _abschließen_: a hand turns the key, the bolt slides home, the door is now locked — that final click is _abschließen_). Then present in the Feynman style: plain-terms explanation, an everyday analogy, then the student explains the concept back or applies it in their own sentence.
+Open with a vivid image: one short, concrete scene — sensory, sequential, cause-and-effect — that acts out the meaning, sharp enough to outlast the session (for _abschließen_: a hand turns the key, the bolt slides home, the door is now locked — that final click is _abschließen_). Then present in the Feynman style: plain-terms explanation, then an everyday analogy.
 
-Done when the vivid image, the plain-terms explanation, and the analogy have all been presented and the student has produced at least one original sentence using it.
+**Clarity checkpoint:** close the presentation by asking whether everything is clear. Anything the student flags gets re-explained from a fresh angle — a new example or new analogy, not the same words again — and the checkpoint repeats. Only once the student confirms clarity, ask them to explain the concept back or apply it in one original sentence of their own.
+
+Done when the student has confirmed clarity and produced at least one original sentence using the material.
 
 ## Step 3 — The bar
 

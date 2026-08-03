@@ -1,5 +1,7 @@
 # tjg-claude-marketplace
 
+When I ask you to merge PR execute `gh pr merge --squash --delete-branch`.
+
 ## Agent skills
 
 ### Issue tracker

@@ -49,6 +49,16 @@
       },
       "source": "./plugins/german-teacher",
       "category": "education"
+    },
+    {
+      "name": "springboot-genius",
+      "description": "Expert guidance for Spring Boot application development",
+      "author": {
+        "name": "Ivan Milosavljevic (TheJavaGuy)",
+        "email": "TheJavaGuy@yandex.com"
+      },
+      "source": "./plugins/springboot-genius",
+      "category": "development"
     }
   ]
 }

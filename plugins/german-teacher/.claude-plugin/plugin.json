@@ -1,7 +1,7 @@
 {
   "name": "german-teacher",
-  "version": "0.0.5",
-  "description": "Interactive German tutoring with CEFR-leveled, mastery-gated lessons",
+  "version": "0.0.6",
+  "description": "Interactive German tutoring with CEFR-leveled, mastery-gated lessons and a five-minute daily Formulierung drill",
   "author": {
     "name": "Ivan Milosavljevic (TheJavaGuy)",
     "email": "TheJavaGuy@yandex.com",

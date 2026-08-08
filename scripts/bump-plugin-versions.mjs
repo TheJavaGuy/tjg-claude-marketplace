@@ -6,12 +6,14 @@ import {
   resolveConfig as prettierResolveConfig,
 } from "prettier";
 
-interface PluginManifest {
-  name: string;
-  version: string;
-  description: string;
-  [key: string]: unknown;
-}
+/**
+ * @typedef {{
+ *   name: string;
+ *   version: string;
+ *   description: string;
+ *   [key: string]: unknown;
+ * }} PluginManifest
+ */
 
 const VERSION_LINE_PATTERN = '"version":';
 const README_START_MARKER = "<!-- PLUGIN-VERSIONS:START -->";
@@ -23,11 +25,20 @@ const repoRoot = execFileSync("git", ["rev-parse", "--show-toplevel"], {
 const pluginsDir = join(repoRoot, "plugins");
 const readmePath = join(repoRoot, "README.md");
 
-function git(args: string[]): string {
+/**
+ * @param {string[]} args
+ * @returns {string}
+ */
+function git(args) {
   return execFileSync("git", args, { cwd: repoRoot, encoding: "utf8" });
 }
 
-function stagedDiffIsEmpty(sinceCommit: string, pathspecs: string[]): boolean {
+/**
+ * @param {string} sinceCommit
+ * @param {string[]} pathspecs
+ * @returns {boolean}
+ */
+function stagedDiffIsEmpty(sinceCommit, pathspecs) {
   try {
     execFileSync(
       "git",
@@ -39,7 +50,7 @@ function stagedDiffIsEmpty(sinceCommit: string, pathspecs: string[]): boolean {
     );
     return true;
   } catch (error) {
-    const status = (error as { status?: number }).status;
+    const { status } = /** @type {{ status?: number }} */ (error);
     if (status === 1) {
       return false;
     }
@@ -47,7 +58,11 @@ function stagedDiffIsEmpty(sinceCommit: string, pathspecs: string[]): boolean {
   }
 }
 
-function bumpPatch(version: string): string {
+/**
+ * @param {string} version
+ * @returns {string}
+ */
+function bumpPatch(version) {
   const match = version.match(/^(\d+)\.(\d+)\.(\d+)$/);
   if (!match) {
     throw new Error(`Cannot bump non-semver version "${version}"`);
@@ -56,25 +71,36 @@ function bumpPatch(version: string): string {
   return `${major}.${minor}.${Number(patch) + 1}`;
 }
 
-function readManifest(manifestPath: string): PluginManifest {
+/**
+ * @param {string} manifestPath
+ * @returns {PluginManifest}
+ */
+function readManifest(manifestPath) {
   return JSON.parse(readFileSync(manifestPath, "utf8"));
 }
 
-function writeManifest(manifestPath: string, manifest: PluginManifest): void {
+/**
+ * @param {string} manifestPath
+ * @param {PluginManifest} manifest
+ * @returns {void}
+ */
+function writeManifest(manifestPath, manifest) {
   writeFileSync(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
 }
 
-function versionAtRef(
-  ref: string,
-  relativeManifestPath: string,
-): string | undefined {
-  let raw: string;
+/**
+ * @param {string} ref
+ * @param {string} relativeManifestPath
+ * @returns {string | undefined}
+ */
+function versionAtRef(ref, relativeManifestPath) {
+  let raw;
   try {
     raw = git(["show", `${ref}:${relativeManifestPath}`]);
   } catch {
     return undefined; // path doesn't exist at that ref
   }
-  return (JSON.parse(raw) as PluginManifest).version;
+  return JSON.parse(raw).version;
 }
 
 const pluginNames = readdirSync(pluginsDir, { withFileTypes: true })

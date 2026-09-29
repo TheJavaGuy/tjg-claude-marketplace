@@ -1,0 +1,13 @@
+{
+  "name": "healthy-food",
+  "version": "0.0.1",
+  "description": "Nutritional analysis of individual whole foods",
+  "author": {
+    "name": "Ivan Milosavljevic (TheJavaGuy)",
+    "email": "TheJavaGuy@yandex.com",
+    "url": "https://github.com/TheJavaGuy"
+  },
+  "repository": "https://github.com/TheJavaGuy/tjg-claude-marketplace/tree/master/plugins/healthy-food",
+  "license": "GPL-3.0-only",
+  "keywords": ["nutrition", "food", "health", "diet", "micronutrients"]
+}

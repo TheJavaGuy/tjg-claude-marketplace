@@ -14,13 +14,14 @@ Each plugin is completely isolated with its own agents, commands, and skills:
 
 <!-- PLUGIN-VERSIONS:START -->
 
-| Plugin            | Version | Description                                                                                                     |
-| ----------------- | ------- | --------------------------------------------------------------------------------------------------------------- |
-| better-writer     | 0.0.2   | Improving writing                                                                                               |
-| effective-java    | 1.0.0   | Skills for Java development according to the famous book Effective Java 3rd Edition                             |
+| Plugin            | Version | Description                                                                         |
+| ----------------- | ------- | ----------------------------------------------------------------------------------- |
+| better-writer     | 0.0.2   | Improving writing                                                                   |
+| effective-java    | 1.0.0   | Skills for Java development according to the famous book Effective Java 3rd Edition |
 | german-teacher    | 0.0.6   | Interactive German tutoring with CEFR-leveled, mastery-gated lessons and a five-minute daily Formulierung drill |
-| spec-creator      | 0.0.1   | Creating or amending specifications for software projects or features                                           |
-| springboot-genius | 0.0.2   | Expert guidance for Spring Boot application development                                                         |
+| healthy-food      | 0.0.1   | Nutritional analysis of individual whole foods                                      |
+| spec-creator      | 0.0.1   | Creating or amending specifications for software projects or features               |
+| springboot-genius | 0.0.2   | Expert guidance for Spring Boot application development                             |
 
 <!-- PLUGIN-VERSIONS:END -->
 
@@ -51,6 +52,7 @@ Install one or more plugins you need:
 /plugin install better-writer@tjg-claude-marketplace
 /plugin install effective-java@tjg-claude-marketplace
 /plugin install german-teacher@tjg-claude-marketplace
+/plugin install healthy-food@tjg-claude-marketplace
 /plugin install spec-creator@tjg-claude-marketplace
 /plugin install springboot-genius@tjg-claude-marketplace
 ```
@@ -75,6 +77,7 @@ Install one or more plugins you need:
 claude plugin install better-writer@tjg-claude-marketplace
 claude plugin install effective-java@tjg-claude-marketplace
 claude plugin install german-teacher@tjg-claude-marketplace
+claude plugin install healthy-food@tjg-claude-marketplace
 claude plugin install spec-creator@tjg-claude-marketplace
 claude plugin install springboot-genius@tjg-claude-marketplace
 ```

@@ -59,6 +59,16 @@
       },
       "source": "./plugins/springboot-genius",
       "category": "development"
+    },
+    {
+      "name": "healthy-food",
+      "description": "Nutritional analysis of individual whole foods",
+      "author": {
+        "name": "Ivan Milosavljevic (TheJavaGuy)",
+        "email": "TheJavaGuy@yandex.com"
+      },
+      "source": "./plugins/healthy-food",
+      "category": "health"
     }
   ]
 }

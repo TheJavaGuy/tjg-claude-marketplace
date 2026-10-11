@@ -1,0 +1,13 @@
+{
+  "name": "richard-feynman",
+  "version": "0.0.1",
+  "description": "Learn any topic with the Feynman technique: plain-language explanations, gap hunting, and teach-back",
+  "author": {
+    "name": "Ivan Milosavljevic (TheJavaGuy)",
+    "email": "TheJavaGuy@yandex.com",
+    "url": "https://github.com/TheJavaGuy"
+  },
+  "repository": "https://github.com/TheJavaGuy/tjg-claude-marketplace/tree/master/plugins/richard-feynman",
+  "license": "GPL-3.0-only",
+  "keywords": ["feynman", "learning", "teaching", "explanation", "education"]
+}

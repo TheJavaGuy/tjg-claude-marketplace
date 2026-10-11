@@ -69,6 +69,16 @@
       },
       "source": "./plugins/healthy-food",
       "category": "health"
+    },
+    {
+      "name": "richard-feynman",
+      "description": "Learn any topic with the Feynman technique: plain-language explanations, gap hunting, and teach-back",
+      "author": {
+        "name": "Ivan Milosavljevic (TheJavaGuy)",
+        "email": "TheJavaGuy@yandex.com"
+      },
+      "source": "./plugins/richard-feynman",
+      "category": "education"
     }
   ]
 }

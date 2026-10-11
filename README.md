@@ -20,6 +20,7 @@ Each plugin is completely isolated with its own agents, commands, and skills:
 | effective-java    | 1.0.0   | Skills for Java development according to the famous book Effective Java 3rd Edition                             |
 | german-teacher    | 0.0.6   | Interactive German tutoring with CEFR-leveled, mastery-gated lessons and a five-minute daily Formulierung drill |
 | healthy-food      | 0.0.1   | Nutritional analysis of individual whole foods                                                                  |
+| richard-feynman   | 0.0.1   | Learn any topic with the Feynman technique: plain-language explanations, gap hunting, and teach-back            |
 | spec-creator      | 0.0.1   | Creating or amending specifications for software projects or features                                           |
 | springboot-genius | 0.0.2   | Expert guidance for Spring Boot application development                                                         |
 
@@ -53,6 +54,7 @@ Install one or more plugins you need:
 /plugin install effective-java@tjg-claude-marketplace
 /plugin install german-teacher@tjg-claude-marketplace
 /plugin install healthy-food@tjg-claude-marketplace
+/plugin install richard-feynman@tjg-claude-marketplace
 /plugin install spec-creator@tjg-claude-marketplace
 /plugin install springboot-genius@tjg-claude-marketplace
 ```
@@ -78,6 +80,7 @@ claude plugin install better-writer@tjg-claude-marketplace
 claude plugin install effective-java@tjg-claude-marketplace
 claude plugin install german-teacher@tjg-claude-marketplace
 claude plugin install healthy-food@tjg-claude-marketplace
+claude plugin install richard-feynman@tjg-claude-marketplace
 claude plugin install spec-creator@tjg-claude-marketplace
 claude plugin install springboot-genius@tjg-claude-marketplace
 ```

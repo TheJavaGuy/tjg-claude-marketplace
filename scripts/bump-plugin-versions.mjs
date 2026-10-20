@@ -18,6 +18,7 @@ import {
 const VERSION_LINE_PATTERN = '"version":';
 const README_START_MARKER = "<!-- PLUGIN-VERSIONS:START -->";
 const README_END_MARKER = "<!-- PLUGIN-VERSIONS:END -->";
+const MARKETPLACE_PATH = ".claude-plugin/marketplace.json";
 
 const repoRoot = execFileSync("git", ["rev-parse", "--show-toplevel"], {
   encoding: "utf8",
@@ -90,14 +91,14 @@ function writeManifest(manifestPath, manifest) {
 
 /**
  * @param {string} ref
- * @param {string} relativeManifestPath
- * @returns {string | undefined}
+ * @param {string} relativePath
+ * @returns {any}
  */
-function versionAtRef(ref, relativeManifestPath) {
+function jsonAtRef(ref, relativePath) {
   let raw;
   try {
     // stderr discarded: a new plugin's manifest is absent at HEAD by design, and git's "fatal:" reads as a failure
-    raw = execFileSync("git", ["show", `${ref}:${relativeManifestPath}`], {
+    raw = execFileSync("git", ["show", `${ref}:${relativePath}`], {
       cwd: repoRoot,
       encoding: "utf8",
       stdio: ["ignore", "pipe", "ignore"],
@@ -105,7 +106,16 @@ function versionAtRef(ref, relativeManifestPath) {
   } catch {
     return undefined; // path doesn't exist at that ref
   }
-  return JSON.parse(raw).version;
+  return JSON.parse(raw);
+}
+
+/**
+ * @param {string} ref
+ * @param {string} relativeManifestPath
+ * @returns {string | undefined}
+ */
+function versionAtRef(ref, relativeManifestPath) {
+  return jsonAtRef(ref, relativeManifestPath)?.version;
 }
 
 const pluginNames = readdirSync(pluginsDir, { withFileTypes: true })
@@ -159,6 +169,26 @@ for (const name of pluginNames) {
   writeManifest(manifestPath, manifest);
   git(["add", relativeManifestPath]);
   console.log(`bumped ${name}: ${previousVersion} -> ${manifest.version}`);
+}
+
+const headMarketplace = jsonAtRef("HEAD", MARKETPLACE_PATH);
+const indexMarketplace = jsonAtRef(":0", MARKETPLACE_PATH);
+if (
+  headMarketplace !== undefined &&
+  indexMarketplace !== undefined &&
+  JSON.stringify(headMarketplace.plugins) !==
+    JSON.stringify(indexMarketplace.plugins) &&
+  headMarketplace.metadata.version === indexMarketplace.metadata.version // not already bumped by an earlier run
+) {
+  const marketplacePath = join(repoRoot, MARKETPLACE_PATH);
+  const marketplace = JSON.parse(readFileSync(marketplacePath, "utf8"));
+  const previousVersion = marketplace.metadata.version;
+  marketplace.metadata.version = bumpPatch(previousVersion);
+  writeFileSync(marketplacePath, `${JSON.stringify(marketplace, null, 2)}\n`);
+  git(["add", MARKETPLACE_PATH]);
+  console.log(
+    `bumped marketplace: ${previousVersion} -> ${marketplace.metadata.version}`,
+  );
 }
 
 const tableRows = pluginNames.map((name) => {

@@ -11,6 +11,8 @@ execution: code
 
 # Markdown Formatting Tooling - Plan
 
+> **Historical record (implemented).** Version numbers below are as of 2026-07-22; current pins live in `package.json` and `.nvmrc`.
+
 ## Goal Capsule
 
 - **Objective:** Introduce baseline Node tooling to this repo so markdown formatting is pinned, scriptable, and enforced at push time.

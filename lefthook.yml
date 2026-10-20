@@ -1,12 +1,14 @@
-# Enforces md/mjs/yml formatting at push time. Check-only: the hook never
-# rewrites files — run `npm run format` to fix what it reports.
+# Runs the full guardrail (format check, typecheck, plugin validation) at push
+# time, the same `npm run check` CI runs. Check-only: the hook never rewrites
+# files — run `npm run format` to fix formatting it reports.
 pre-push:
   jobs:
-    - name: format check
-      run: git ls-files -z '*.md' '*.mjs' '*.yml' | xargs -0 -r npx prettier --check
+    - name: check
+      run: npm run check
 
-# Bumps a plugin's patch version (and the README version table) whenever
-# a commit touches that plugin's files, staging the result into the commit.
+# Bumps a plugin's patch version (and the README version table) whenever a
+# commit touches that plugin's files, and the marketplace metadata.version
+# whenever marketplace.json plugins[] changes, staging the result into the commit.
 pre-commit:
   jobs:
     - name: bump plugin versions

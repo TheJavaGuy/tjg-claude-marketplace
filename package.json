@@ -8,14 +8,17 @@
   },
   "scripts": {
     "prepare": "lefthook install",
-    "format": "prettier --write \"**/*.{md,mjs,yml}\"",
-    "format:changed": "git diff -z --name-only --diff-filter=d \"$(git merge-base master HEAD)\" -- '*.md' '*.mjs' '*.yml' | xargs -0 -r prettier --write",
+    "format": "prettier --write \"**/*.{md,mjs,yml,json}\"",
+    "format:changed": "git diff -z --name-only --diff-filter=d \"$(git merge-base master HEAD)\" -- '*.md' '*.mjs' '*.yml' '*.json' | xargs -0 -r prettier --write",
     "bump-versions": "node scripts/bump-plugin-versions.mjs",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "format:check": "git ls-files -z '*.md' '*.mjs' '*.yml' '*.json' | xargs -0 -r prettier --check",
+    "validate": "node scripts/validate.mjs",
+    "check": "npm run format:check && npm run typecheck && npm run validate"
   },
   "devDependencies": {
     "@types/node": "24.19.1",
-    "lefthook": "2.1.16",
+    "lefthook": "2.2.2",
     "prettier": "3.9.9",
     "typescript": "7.0.2"
   }

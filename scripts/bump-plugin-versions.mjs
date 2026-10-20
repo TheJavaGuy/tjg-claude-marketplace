@@ -96,7 +96,12 @@ function writeManifest(manifestPath, manifest) {
 function versionAtRef(ref, relativeManifestPath) {
   let raw;
   try {
-    raw = git(["show", `${ref}:${relativeManifestPath}`]);
+    // stderr discarded: a new plugin's manifest is absent at HEAD by design, and git's "fatal:" reads as a failure
+    raw = execFileSync("git", ["show", `${ref}:${relativeManifestPath}`], {
+      cwd: repoRoot,
+      encoding: "utf8",
+      stdio: ["ignore", "pipe", "ignore"],
+    });
   } catch {
     return undefined; // path doesn't exist at that ref
   }

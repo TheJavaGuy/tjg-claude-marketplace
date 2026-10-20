@@ -1,6 +1,8 @@
 # tjg-claude-marketplace
 
-When I ask you to merge PR execute `gh pr merge --squash --delete-branch`.
+Work on a branch and open a PR; never commit to master. When I ask you to merge PR execute `gh pr merge --squash --delete-branch`.
+
+Adding a plugin or skill: follow `docs/agents/adding-plugins.md`.
 
 ## Agent skills
 
@@ -10,4 +12,4 @@ Issues tracked in GitHub Issues (TheJavaGuy/tjg-claude-marketplace) via the `gh`
 
 ### Domain docs
 
-Single-context: `CONTEXT.md` + `docs/adr/` at the repo root. See `docs/agents/domain.md`.
+`CONTEXT.md` and `docs/adr/` do not exist yet; `/domain-modeling` creates them when needed (see `docs/agents/domain.md`). Past design work lives in `docs/plans/`.

@@ -1,4 +1,4 @@
-# My collection of Claude Code plugins for Java, writing, and learning German
+# My collection of Claude Code plugins
 
 ### How It Works
 

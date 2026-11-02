@@ -1,39 +1,31 @@
 ---
 name: spec-append-project
-description: Extend an existing project specification by identifying gaps and interviewing the user to fill them. Use when the user says "update the spec", "add to the spec", "the spec is missing X", or wants to expand requirements, design decisions, or operational details in an existing spec file.
+description: Fill the gaps in an existing spec file by interviewing the user. Use when the user wants to update or extend a spec, or says a spec is missing something.
 argument-hint: [existing spec file]
 allowed-tools: AskUserQuestion, Read, Glob, Grep, Write, Edit
-model: claude-opus-4-6
+model: opus
 ---
 
 # Spec append project
 
-## Task
+Find what the spec at $ARGUMENTS leaves underspecified, interview the user to fill those gaps, and merge the answers back into the file.
 
-Extend an existing project specification at $ARGUMENTS by identifying what is underspecified, interviewing the user to fill the gaps, and merging the new content back in.
+## 1. Read the spec
 
----
+If $ARGUMENTS is empty, missing, or an empty file, find candidate spec files in the repository and ask the user with AskUserQuestion which one to extend.
 
-**Step 1 — Validate and read the spec.**
-
-Check that $ARGUMENTS exists and is non-empty. If the file is missing or empty, use AskUserQuestion to ask the user to confirm the path or provide the content before proceeding.
-
-Read the file and output a brief, structured summary:
+Read the whole file and summarise it before asking anything:
 
 - **Scope**: what the project does and who it serves
 - **Tech stack**: languages, frameworks, infrastructure
 - **Decisions made**: architecture, data model, APIs, auth, deployment
-- **What is explicitly left open**: any TODOs, TBDs, or unresolved questions already noted
+- **Already open**: TODOs, TBDs, and unresolved questions the spec notes
 
-Do not ask questions yet.
+## 2. Find the gaps
 
----
+A gap is anything an implementer would have to guess. Rate each area as covered, partial, or absent:
 
-**Step 2 — Identify gaps.**
-
-Audit the spec against the following gap categories. For each category, note whether it is fully covered, partially covered, or absent:
-
-| Category                    | Examples of what to look for                             |
+| Area                        | What to look for                                         |
 | --------------------------- | -------------------------------------------------------- |
 | Functional requirements     | User stories, edge cases, error flows, permissions       |
 | Non-functional requirements | Performance targets, SLAs, scalability, accessibility    |
@@ -44,40 +36,23 @@ Audit the spec against the following gap categories. For each category, note whe
 | Testing strategy            | Unit, integration, e2e, load testing expectations        |
 | Open questions              | Unresolved trade-offs, deferred decisions                |
 
-Prioritise gaps that would block implementation or cause rework. Ignore cosmetic or editorial gaps.
+Keep the gaps that would block implementation or cause rework, ranked by impact. Wording and formatting stay as they are.
 
----
+## 3. Interview
 
-**Step 3 — Interview.**
-
-For each prioritised gap, use AskUserQuestion to ask one focused question at a time. Rules:
-
-- Ask about the highest-impact gap first
-- Follow up if an answer is ambiguous or introduces new questions
-- Stop when: all high-priority gaps are resolved, the user explicitly says they are done, or three consecutive questions reveal no new information
-- Do not revisit topics already covered in the spec
-
-Example question shapes:
+Walk the gaps highest-impact first, one question per AskUserQuestion call, and follow up until each answer is concrete enough to build from. Every question targets something the spec leaves open; what it already settles stays settled. Question shapes:
 
 - "The spec doesn't address [X]. What is the expected behaviour when [scenario]?"
 - "You mentioned [Y] but haven't specified [constraint]. What are the limits?"
 - "Is [Z] in scope for v1, or deferred?"
 
----
+The interview is done when every high-impact gap is resolved or recorded as an open question, the user says they are done, or three answers in a row add nothing new.
 
-**Step 4 — Update the spec.**
+## 4. Merge
 
-Merge answers into $ARGUMENTS:
+Merge each answer into $ARGUMENTS:
 
-- Place new content in the **existing section** it belongs to, immediately after the relevant content
-- If no matching section exists, **add a new section** with a clear heading at the end of the file
-- Do not duplicate content already in the file — only add net-new information
-- Preserve existing formatting and heading style
+- Place it right after the related content in the section it belongs to. When no section fits, add one at the end, matching the file's heading style.
+- Add only net-new information, and replace each TBD an answer resolves.
 
-After writing, re-read the updated file and verify:
-
-1. No content was accidentally overwritten
-2. New sections are coherent with surrounding content
-3. No duplicate information exists
-
-Use AskUserQuestion to show the user a one-line summary of what was added and ask if the result looks correct. If they request changes, apply them before closing.
+Re-read the changed sections and confirm that no existing content was lost and no fact appears twice. Then show the user a one-line summary of what changed and ask with AskUserQuestion whether it looks right; apply any changes they request.

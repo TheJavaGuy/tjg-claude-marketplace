@@ -1,25 +1,41 @@
 ---
 name: spec-init-feature
-description: Create a specification for a new feature of existing software project. Use when the user says "create the spec for the new feature", "help me plan a new feature", "let's specify a feature" and similar.
+description: Write a spec for a new feature of an existing codebase by reading the code and interviewing the user. Use when the user wants a spec or requirements for a feature.
 argument-hint: [feature name]
-allowed-tools: Read, Glob, Grep, Write, Edit
-model: claude-opus-4-6
+allowed-tools: AskUserQuestion, Read, Glob, Grep, Write, Edit
+model: opus
 ---
 
 # Spec init feature
 
-## Task
+Interview the user until every coverage area of the feature $ARGUMENTS is decided or recorded as an open question, then write the spec. If $ARGUMENTS is empty, the first question is what the feature is.
 
-Help me build a spec for a new feature of my project. Feature name is in $ARGUMENTS.
+## 1. Read the codebase
 
-Use AskUserQuestion tool to help me build the spec in $ARGUMENTS by interviewing me and gathering requirements and details about the feature implementation, UI & UX (if any), tech stack (probably same as already existing in project), concerns, tradeoffs, etc.
+Before the first question, read the project's README, CLAUDE.md or AGENTS.md, build files, and the code the feature will touch. The code is the source of truth for the stack, conventions, and current behaviour; the user answers only what the code cannot. Note where existing specs or design docs live and how they are named.
 
-Make sure questions are not obvious and probe deeper into the underlying needs and constraints.
+## 2. Interview
 
-Interview me continually and systematically until the spec is complete. Document all responses and insights to create a comprehensive and well-structured specification that serves as the foundation for the feature.
+A gap is anything an implementer would have to guess. Walk the gaps highest-impact first, one question per AskUserQuestion call, and follow up until each answer is concrete enough to build from.
 
-When the specification is complete:
+Ask what only the user can answer: the need behind the feature, the constraint behind a choice, what happens when things go wrong, what this iteration leaves out. Take each answer one level deeper with "why", "what breaks if", or "how many".
 
-- suggest a file name
-- use the AskUserQuestion tool to let user change the file name
-- save it
+| Area                        | What to pin down                                             |
+| --------------------------- | ------------------------------------------------------------ |
+| Problem and users           | Who needs it, the problem it solves, what success looks like |
+| Scope                       | What the feature does, explicit non-goals                    |
+| Behaviour                   | User flows, edge cases, error flows, permissions             |
+| UI and UX                   | Where the feature surfaces, if anywhere                      |
+| Data changes                | New or changed entities, migration of existing data          |
+| Fit with existing code      | Modules touched, APIs changed, backward compatibility        |
+| Non-functional requirements | Performance, scale, security                                 |
+| Rollout                     | Feature flags, release order, rollback                       |
+| Testing                     | What gets tested at the unit, integration, and e2e level     |
+
+The interview is done when every area is decided or recorded as an open question and the user confirms nothing is missing. If the user ends it earlier, record each untouched area as an open question.
+
+## 3. Write the spec
+
+1. Suggest a path that follows the repository's existing spec location and naming; with none, suggest `docs/specs/<feature-slug>.md`. Let the user confirm or change it with AskUserQuestion.
+2. Write one section per area, in the table's order, then an Open questions section. State each decision with its reason.
+3. Tell the user the path and the open questions that remain.

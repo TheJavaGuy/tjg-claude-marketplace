@@ -1,6 +1,7 @@
 ---
 name: spec-append-project
-description: Fill the gaps in an existing spec file by interviewing the user. Use when the user wants to update or extend a spec, or says a spec is missing something.
+description: Fill the gaps in an existing spec file by interviewing the user.
+disable-model-invocation: true
 argument-hint: [existing spec file]
 allowed-tools: AskUserQuestion, Read, Glob, Grep, Write, Edit
 model: opus

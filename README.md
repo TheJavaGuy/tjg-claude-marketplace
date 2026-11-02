@@ -21,7 +21,7 @@ Each plugin is completely isolated with its own agents, commands, and skills:
 | german-teacher    | 0.0.6   | Interactive German tutoring with CEFR-leveled, mastery-gated lessons and a five-minute daily Formulierung drill |
 | healthy-food      | 0.0.1   | Nutritional analysis of individual whole foods                                                                  |
 | richard-feynman   | 0.0.1   | Learn any topic with the Feynman technique: plain-language explanations, gap hunting, and teach-back            |
-| spec-creator      | 0.0.2   | Creating or amending specifications for software projects or features                                           |
+| spec-creator      | 0.0.3   | Creating or amending specifications for software projects or features                                           |
 | springboot-genius | 0.0.2   | Expert guidance for Spring Boot application development                                                         |
 
 <!-- PLUGIN-VERSIONS:END -->

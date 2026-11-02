@@ -1,6 +1,7 @@
 ---
 name: spec-init-project
-description: Write a spec for a new software project by interviewing the user. Use when the user wants a spec or requirements for a project that has no code yet.
+description: Write a spec for a new software project by interviewing the user.
+disable-model-invocation: true
 argument-hint: [new project dir]
 allowed-tools: AskUserQuestion, Read, Glob, Grep, Write, Edit
 model: opus

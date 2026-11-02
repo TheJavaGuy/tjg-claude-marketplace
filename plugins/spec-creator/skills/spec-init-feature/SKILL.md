@@ -1,6 +1,7 @@
 ---
 name: spec-init-feature
-description: Write a spec for a new feature of an existing codebase by reading the code and interviewing the user. Use when the user wants a spec or requirements for a feature.
+description: Write a spec for a new feature of an existing codebase by reading the code and interviewing the user.
+disable-model-invocation: true
 argument-hint: [feature name]
 allowed-tools: AskUserQuestion, Read, Glob, Grep, Write, Edit
 model: opus

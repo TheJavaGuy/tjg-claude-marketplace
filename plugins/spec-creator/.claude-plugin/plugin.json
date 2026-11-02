@@ -9,11 +9,5 @@
   },
   "repository": "https://github.com/TheJavaGuy/tjg-claude-marketplace/tree/master/plugins/spec-creator",
   "license": "GPL-3.0-only",
-  "keywords": [
-    "spec",
-    "specification",
-    "requirements",
-    "interview",
-    "planning"
-  ]
+  "keywords": ["spec", "specification", "requirements", "interview", "planning"]
 }

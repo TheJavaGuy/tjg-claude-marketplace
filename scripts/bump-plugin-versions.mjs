@@ -83,10 +83,16 @@ function readManifest(manifestPath) {
 /**
  * @param {string} manifestPath
  * @param {PluginManifest} manifest
- * @returns {void}
+ * @returns {Promise<void>}
  */
-function writeManifest(manifestPath, manifest) {
-  writeFileSync(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
+async function writeManifest(manifestPath, manifest) {
+  // prettier, not JSON.stringify alone: stringify puts every array item on its own line, which format:check rejects
+  const prettierConfig = await prettierResolveConfig(manifestPath);
+  const formatted = await prettierFormat(JSON.stringify(manifest, null, 2), {
+    ...prettierConfig,
+    filepath: manifestPath,
+  });
+  writeFileSync(manifestPath, formatted);
 }
 
 /**
@@ -166,7 +172,7 @@ for (const name of pluginNames) {
   const manifest = readManifest(manifestPath);
   const previousVersion = manifest.version;
   manifest.version = bumpPatch(previousVersion);
-  writeManifest(manifestPath, manifest);
+  await writeManifest(manifestPath, manifest);
   git(["add", relativeManifestPath]);
   console.log(`bumped ${name}: ${previousVersion} -> ${manifest.version}`);
 }
